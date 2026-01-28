@@ -11,11 +11,12 @@ jobs:
     - name: Checkout source
       uses: actions/checkout@v4
 
-    - name: Install Delphi (Trial)
-      uses: gcarreno/setup-delphi@v1
-      with:
-        version: '12.1'
-        platform: 'Win32'
+   - name: Setup Delphi Community (Win32)
+     uses: embarcadero/setup-delphi@v1
+     with:
+       version: '11.3'
+       platform: 'Win32'
+       edition: 'community'
 
     - name: Build RDPWInst
       run: |
