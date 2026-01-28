@@ -1,0 +1,29 @@
+name: Build RDPWInst (Win32)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v4
+
+    - name: Install Delphi (Trial)
+      uses: gcarreno/setup-delphi@v1
+      with:
+        version: '12.1'
+        platform: 'Win32'
+
+    - name: Build RDPWInst
+      run: |
+        cd src-installer
+        msbuild RDPWInst.dproj /p:Config=Release /p:Platform=Win32
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: RDPWInst-Win32
+        path: src-installer/Win32/Release/RDPWInst.exe
